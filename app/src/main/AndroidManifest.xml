@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dell.coursetable">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,9 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".TimeTableActivity"></activity>
-        <activity android:name=".CourseInfoActivity"></activity>
+        <activity android:name=".TimeTableActivity" />
+        <activity android:name=".CourseInfoActivity" />
+        <activity android:name=".EvaluateActivity"></activity>
     </application>
 
 </manifest>

@@ -11,7 +11,6 @@ import com.example.dell.coursetable.coursedata.CourseList;
 import com.example.dell.coursetable.presenter.CoursePresenter;
 import com.example.dell.coursetable.presenter.CoursePresenterImpl;
 import com.example.dell.coursetable.view.CourseTableViewImpl;
-import com.wx.wheelview.widget.WheelView;
 import com.zhuangfei.timetable.core.OnSubjectItemClickListener;
 import com.zhuangfei.timetable.core.SubjectBean;
 import com.zhuangfei.timetable.core.TimetableView;
@@ -26,7 +25,6 @@ public class TimeTableActivity extends AppCompatActivity implements OnSubjectIte
 
     private TimetableView mTimeTableView;
     private List<SubjectBean> subjectBeans = new ArrayList<>();
-    private WheelView wheelView;
     private List<String> weekList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +38,12 @@ public class TimeTableActivity extends AppCompatActivity implements OnSubjectIte
         cPresenter=new CoursePresenter(TimeTableActivity.this);
         cPresenter.show();
         mTimeTableView.setDataSource(subjectBeans)
-                .setCurWeek(2)
+                .setCurWeek("2018-1-1 00-00-00")
                 .setMax(true)
                 .setShowDashLayer(true)
                 .setOnSubjectItemClickListener(this)
                 .showTimetableView();
-        mTimeTableView.changeWeek(2,true);
+        mTimeTableView.changeWeek(mTimeTableView.getCurWeek(),true);
     }
 
     private void initCourse(CourseList[][] courseLists_d , CourseList[][] courseLists_s){
