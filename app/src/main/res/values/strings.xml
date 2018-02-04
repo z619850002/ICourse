@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ClassSchedule</string>
+    <string name="login">LOGIN</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="go">GO</string>
+    <string name="forgot_your_password">Forgot your password</string>
+</resources>
