@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.example.dell.coursetable.coursedata.CourseInformation;
 import com.example.dell.coursetable.coursedata.CourseList;
+import com.example.dell.coursetable.userdata.CourseData;
+import com.example.dell.coursetable.userdata.DbUtils;
 import com.example.dell.coursetable.webutil.HttpUtil;
 
 import org.jsoup.Jsoup;
@@ -289,6 +291,13 @@ public class CourseModel implements CourseModelImpl {
             }
         });
         futureTask.run();
+        List<CourseData> list = DbUtils.getQueryByWhere(CourseData.class,"studentId", new String[]{id});
+        if(list.isEmpty()||list.size()==0){
+            CourseData data = new CourseData();
+            data.setStudentId(id);
+            data.setInfo(futureTask.get());
+            DbUtils.insert(data);
+        }
         return futureTask.get();
     }
 
@@ -348,7 +357,13 @@ public class CourseModel implements CourseModelImpl {
     public boolean initData(String id, String password) {
 
         try {
-            String rawData = login(id, password);
+            String rawData;
+            List<CourseData> list = DbUtils.getQueryByWhere(CourseData.class, "studentId", new String[]{id});
+            if(list.isEmpty()||list.size()==0){
+                rawData = login(id, password);
+            } else {
+                rawData = list.get(0).getInfo();
+            }
             return initCourse(rawData);
         }
         catch (Exception e)

@@ -38,7 +38,7 @@ public class TimeTableActivity extends AppCompatActivity implements OnSubjectIte
         cPresenter=new CoursePresenter(TimeTableActivity.this);
         cPresenter.show();
         mTimeTableView.setDataSource(subjectBeans)
-                .setCurWeek("2018-1-1 00-00-00")
+                .setCurWeek("2018-1-1 00:00:00")
                 .setMax(true)
                 .setShowDashLayer(true)
                 .setOnSubjectItemClickListener(this)
@@ -167,8 +167,6 @@ public class TimeTableActivity extends AppCompatActivity implements OnSubjectIte
 
     @Override
     public void onItemClick(View v, List<SubjectBean> subjectList) {
-        int i = 8;
-        i = i + 1 ;
         Intent intent = new Intent(TimeTableActivity.this, CourseInfoActivity.class);
         startActivity(intent);
     }

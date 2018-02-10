@@ -2,7 +2,6 @@ package com.example.dell.coursetable;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.transition.Explode;
@@ -12,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.dell.coursetable.model.UserModel;
 import com.example.dell.coursetable.presenter.CoursePresenterImpl;
 import com.example.dell.coursetable.presenter.LoginPresenter;
 import com.example.dell.coursetable.view.LoginViewImpl;
@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewImpl {
         explode.setDuration(500);
         getWindow().setExitTransition(explode);
         getWindow().setEnterTransition(explode);
-        ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
+        UserModel.getInstance().saveUserInfo(LoginActivity.this, etUsername.getText().toString(), etPassword.getText().toString());
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -74,6 +74,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewImpl {
         });
         Intent i2 = new Intent(LoginActivity.this,TimeTableActivity.class);
         startActivity(i2);
+        finish();
     }
 
     @Override
