@@ -254,11 +254,11 @@ public class CourseModel implements CourseModelImpl {
         FutureTask<String> futureTask=new FutureTask<String>(new Callable<String>() {
             @Override
             public String call() throws Exception {
-                String response1 = HttpUtil.sendGetRequest("http://4m3.tongji.edu.cn/eams/login.action", false, null);
+                String response1 = HttpUtil.sendGetRequest("http://4m3.tongji.edu.cn/eams/login.action");
                 List<Cookie> originCookie = HttpUtil.formerCookie;
-                String response2 = HttpUtil.sendGetRequest("http://4m3.tongji.edu.cn/eams/samlCheck", false, null);
+                String response2 = HttpUtil.sendGetRequest("http://4m3.tongji.edu.cn/eams/samlCheck");
                 String nextUrl=getSAMLRequest(response2);
-                String response3=HttpUtil.sendGetRequest("https://ids.tongji.edu.cn:8443/nidp/saml2/sso?"+nextUrl , false , null);
+                String response3=HttpUtil.sendGetRequest("https://ids.tongji.edu.cn:8443/nidp/saml2/sso?"+nextUrl );
                 FormBody.Builder requestBodyBuilder = new FormBody.Builder();
                 requestBodyBuilder.add("option" , "credential");
                 requestBodyBuilder.add("Ecom_User_ID" , id);
@@ -268,9 +268,9 @@ public class CourseModel implements CourseModelImpl {
 
                 nextUrl="https://ids.tongji.edu.cn:8443"+getLoginUrl(response3);
 
-                String response4 = HttpUtil.sendPostRequest(nextUrl,new FormBody.Builder().build(),false , null);
-                String response5 = HttpUtil.sendPostRequest("https://ids.tongji.edu.cn:8443/nidp/saml2/sso?sid=0&sid=0", formBody, false, null);
-                String response6 = HttpUtil.sendGetRequest("https://ids.tongji.edu.cn:8443/nidp/saml2/sso?sid=0" , false , null);
+                String response4 = HttpUtil.sendPostRequest(nextUrl,new FormBody.Builder().build());
+                String response5 = HttpUtil.sendPostRequest("https://ids.tongji.edu.cn:8443/nidp/saml2/sso?sid=0&sid=0", formBody);
+                String response6 = HttpUtil.sendGetRequest("https://ids.tongji.edu.cn:8443/nidp/saml2/sso?sid=0" );
                 String SAMLResponse=getSAMLResponse(response6);
                 String relayState=getRelayState(response6);
 
@@ -282,7 +282,7 @@ public class CourseModel implements CourseModelImpl {
                 RequestBody formBody2=requestBodyBuilder2.build();
 
 
-                String response7 = HttpUtil.sendPostRequest("http://4m3.tongji.edu.cn/eams/saml/SAMLAssertionConsumer",formBody2 , false , null);
+                String response7 = HttpUtil.sendPostRequest("http://4m3.tongji.edu.cn/eams/saml/SAMLAssertionConsumer",formBody2 );
                 //String response8 = HttpUtil.sendGetRequest("http://4m3.tongji.edu.cn/eams/samlCheck",false,null);
                 //String response9 = HttpUtil.sendGetRequest("http://4m3.tongji.edu.cn/eams/home.action" , false  , null);
                 //String finalResponse=response9;
@@ -305,7 +305,7 @@ public class CourseModel implements CourseModelImpl {
     //获取课表
     public String findCourse() throws Exception
     {
-        String response1=HttpUtil.sendGetRequest("http://4m3.tongji.edu.cn/eams/courseTableForStd.action" ,false , null);
+        String response1=HttpUtil.sendGetRequest("http://4m3.tongji.edu.cn/eams/courseTableForStd.action" );
         String ids=getIds(response1);
         String semesterId=getSemesterId(response1);
         FormBody.Builder builder=new FormBody.Builder();
@@ -315,7 +315,7 @@ public class CourseModel implements CourseModelImpl {
         builder.add("setting.kind","std");
         builder.add("startWeek","1");
         RequestBody body=builder.build();
-        String response2=HttpUtil.sendPostRequest("http://4m3.tongji.edu.cn/eams/courseTableForStd!courseTable.action",body , false , null);
+        String response2=HttpUtil.sendPostRequest("http://4m3.tongji.edu.cn/eams/courseTableForStd!courseTable.action",body );
         return response2;
     }
 

@@ -31,4 +31,5 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
     compile 'com.zhuangfei:TimetableView:1.0.0'
     compile 'com.wx.wheelview:wheelview:1.3.3'
+    compile 'com.google.code.gson:gson:2.6.2'
 }

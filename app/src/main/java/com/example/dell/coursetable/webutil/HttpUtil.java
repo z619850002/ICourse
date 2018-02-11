@@ -28,6 +28,9 @@ import okhttp3.Response;
  */
 public class HttpUtil {
 
+
+    static public String host="http://192.168.0.101:8081";
+
     static public List<Cookie> formerCookie=new ArrayList<Cookie>();
 
     static private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
@@ -43,7 +46,7 @@ public class HttpUtil {
      @throws         InterruptedException
      @throws         ExecutionException
      */
-    static public String sendGetRequest(final String url , boolean useCookie , String cookie) throws IOException , InterruptedException , ExecutionException{
+    static public String sendGetRequest(final String url ) throws IOException , InterruptedException , ExecutionException{
         FutureTask<String> futureTask = new FutureTask<String>(new Callable<String>() {
             @Override
             public String call() throws IOException {
@@ -91,7 +94,7 @@ public class HttpUtil {
      @throws         ExecutionException
      */
 
-    static public String sendPostRequest(final String url , final RequestBody data , boolean useCookie , final String cookie) throws IOException , InterruptedException , ExecutionException
+    static public String sendPostRequest(final String url , final RequestBody data ) throws IOException , InterruptedException , ExecutionException
     {
         FutureTask<String> futureTask = new FutureTask<String>(new Callable<String>() {
             @Override
