@@ -1,24 +1,21 @@
 package com.example.dell.coursetable.presenter;
 
 import com.example.dell.coursetable.model.CourseModel;
-import com.example.dell.coursetable.view.LoginViewImpl;
+import com.example.dell.coursetable.view.SplashViewImpl;
 
 /**
- * Created by dell on 2018/2/3.
+ * Created by 田雍恺 on 2018/2/10.
  */
 
-public class LoginPresenter implements CoursePresenterImpl {
+public class SplashPresenter implements CoursePresenterImpl{
 
-
-    LoginViewImpl lView;
+    SplashViewImpl sView;
     CourseModel cModel;
 
-
-    public LoginPresenter(LoginViewImpl lView) {
-        this.lView = lView;
+    public SplashPresenter(SplashViewImpl sView){
+        this.sView = sView;
         this.cModel = new CourseModel();
     }
-
     @Override
     public void update(final String id, final String password) {
         new Thread(new Runnable() {
@@ -38,12 +35,10 @@ public class LoginPresenter implements CoursePresenterImpl {
 
     @Override
     public void show() {
-        lView.showData();
+        sView.showDate();
     }
 
-
-    public void showError(String s)
-    {
-        lView.showError(s);
+    public void showError(String s){
+        sView.showError(s);
     }
 }

@@ -18,9 +18,9 @@ public class RadarView extends View {
     private float radius; //网格最大半径
     private int centerX;  //中心X
     private int centerY;  //中心Y
-    private String[] titles = {"a", "b", "c", "d", "e"};
-    private double[] data = {100, 60, 60, 60, 100}; //各个维度分值
-    private float maxValue = 100;  //数据最大值
+    private String[] titles = {"考评", "负担", "实用", "趣味", "教师"};
+    private double[] data = {3, 3, 3, 3, 3}; //各个维度分值
+    private float maxValue = 5;  //数据最大值
     private Paint mainPaint;    //雷达区画笔
     private Paint valuePaint;   //数据区画笔
     private Paint textPaint;    //文本画笔

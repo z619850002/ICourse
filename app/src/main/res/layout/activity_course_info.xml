@@ -218,8 +218,8 @@
             </RelativeLayout>
             <com.example.dell.coursetable.RadarView
                 android:id="@+id/course_radar"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_width="310dp"
+                android:layout_height="310dp"
                 android:layout_gravity="center"/>
             <TextView
                 android:id="@+id/evaluate"
