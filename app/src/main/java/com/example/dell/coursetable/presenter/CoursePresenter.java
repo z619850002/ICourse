@@ -1,12 +1,6 @@
 package com.example.dell.coursetable.presenter;
 
-import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.example.dell.coursetable.coursedata.CourseList;
 import com.example.dell.coursetable.model.CourseModel;
-import com.example.dell.coursetable.model.CourseModelImpl;
 import com.example.dell.coursetable.view.CourseTableViewImpl;
 
 
@@ -20,7 +14,6 @@ public class CoursePresenter implements CoursePresenterImpl {
 
     CourseTableViewImpl cView;
     CourseModel cModel;
-
 
     public CoursePresenter(CourseTableViewImpl cView) {
         this.cView = cView;
@@ -48,9 +41,6 @@ public class CoursePresenter implements CoursePresenterImpl {
     public void show() {
         cView.showData(cModel.getClassState_d() , cModel.getClassState_s());
     }
-
-
-
     public void showError(String s)
     {
         cView.showError(s);

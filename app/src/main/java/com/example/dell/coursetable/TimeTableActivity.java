@@ -207,6 +207,7 @@ public class TimeTableActivity extends AppCompatActivity implements OnSubjectIte
                 bundle.putString("start",subjectList.get(i).getStart()+"");
                 bundle.putString("step",subjectList.get(i).getStep()+"");
                 bundle.putString("teacher",subjectList.get(i).getTeacher());
+
                 List<CourseInformation>list = courseLists_d[subjectList.get(i).getDay()-1][subjectList.get(i).getStart()-1].getCourseInfomations();
                 int j = 0;
                 while(!list.get(j).getName().equals(subjectList.get(i).getName())){

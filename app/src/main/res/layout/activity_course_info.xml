@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.dell.coursetable.CourseInfoActivity"
     android:background="#f1faff">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -185,7 +186,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/student"
+                android:id="@+id/comment"
                 android:background="#ffffff"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -195,7 +196,7 @@
                     android:id="@+id/student_pic"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:background="@drawable/student"
+                    android:background="@drawable/comment"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"/>
 
@@ -203,7 +204,7 @@
                     android:layout_toRightOf="@id/student_pic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="课堂同学"
+                    android:text="查看评论"
                     android:textSize="18sp"
                     android:textColor="@android:color/black"
                     android:layout_centerVertical="true"
@@ -233,5 +234,11 @@
         </LinearLayout>
 
     </ScrollView>
-
+    <ProgressBar
+        android:layout_marginTop="50dp"
+        android:visibility="gone"
+        android:id="@+id/progressbar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

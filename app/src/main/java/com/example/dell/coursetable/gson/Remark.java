@@ -7,7 +7,7 @@ package com.example.dell.coursetable.gson;
 public class Remark {
     private Integer remarkId;
 
-    private String Content;
+    private String content;
 
     private Integer examDifficulty;
 
@@ -32,11 +32,11 @@ public class Remark {
     }
 
     public String getContent() {
-        return Content;
+        return content;
     }
 
     public void setContent(String content) {
-        Content = content;
+        this.content = content;
     }
 
     public Integer getExamDifficulty() {
