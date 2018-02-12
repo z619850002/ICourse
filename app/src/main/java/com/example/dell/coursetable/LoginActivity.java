@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewImpl {
         getWindow().setExitTransition(explode);
         getWindow().setEnterTransition(explode);
         UserModel.getInstance().saveUserInfo(LoginActivity.this, etUsername.getText().toString(), etPassword.getText().toString());
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

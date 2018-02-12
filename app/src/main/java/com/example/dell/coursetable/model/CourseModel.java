@@ -164,13 +164,6 @@ public class CourseModel implements CourseModelImpl {
         return courseState_d;
     }
 
-
-
-
-
-
-
-
     private String getSAMLRequest(String html)
     {
         String s1="";

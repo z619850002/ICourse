@@ -3,17 +3,14 @@ package com.example.dell.coursetable.webutil;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Cookie;
 import okhttp3.CookieJar;
-import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -29,7 +26,7 @@ import okhttp3.Response;
 public class HttpUtil {
 
 
-    static public String host="http://192.168.0.101:8081";
+    static public String host="http://120.78.145.26:8081";
 
     static public List<Cookie> formerCookie=new ArrayList<Cookie>();
 
