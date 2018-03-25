@@ -51,9 +51,10 @@ public class SplashActivity extends AppCompatActivity implements SplashViewImpl{
 
     @Override
     public void showDate() {
-       Intent intent = new Intent(SplashActivity.this, TimeTableActivity.class);
-       startActivity(intent);
-       finish();
+       //Intent intent = new Intent(SplashActivity.this, TimeTableActivity.class);
+        Intent intent = new Intent(SplashActivity.this, TimeTableActivity.class);
+        startActivity(intent);
+        finish();
     }
     @Override
     public void showError(String message) {

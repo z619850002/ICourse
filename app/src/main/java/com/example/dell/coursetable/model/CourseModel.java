@@ -164,6 +164,13 @@ public class CourseModel implements CourseModelImpl {
         return courseState_d;
     }
 
+
+
+
+
+
+
+
     private String getSAMLRequest(String html)
     {
         String s1="";
@@ -284,13 +291,13 @@ public class CourseModel implements CourseModelImpl {
             }
         });
         futureTask.run();
-        List<CourseData> list = DbUtils.getQueryByWhere(CourseData.class,"studentId", new String[]{id});
+        /*List<CourseData> list = DbUtils.getQueryByWhere(CourseData.class,"studentId", new String[]{id});
         if(list.isEmpty()||list.size()==0){
             CourseData data = new CourseData();
             data.setStudentId(id);
             data.setInfo(futureTask.get());
             DbUtils.insert(data);
-        }
+        }*/
         return futureTask.get();
     }
 
@@ -351,12 +358,13 @@ public class CourseModel implements CourseModelImpl {
 
         try {
             String rawData;
-            List<CourseData> list = DbUtils.getQueryByWhere(CourseData.class, "studentId", new String[]{id});
+            /*List<CourseData> list = DbUtils.getQueryByWhere(CourseData.class, "studentId", new String[]{id});
             if(list.isEmpty()||list.size()==0){
                 rawData = login(id, password);
             } else {
                 rawData = list.get(0).getInfo();
-            }
+            }*/
+            rawData = login(id,password);
             return initCourse(rawData);
         }
         catch (Exception e)

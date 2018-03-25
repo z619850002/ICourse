@@ -3,6 +3,7 @@ package com.example.dell.coursetable.model;
 import com.example.dell.coursetable.coursedata.CourseInformation;
 import com.example.dell.coursetable.coursedata.CourseList;
 import com.example.dell.coursetable.gson.Course;
+import com.example.dell.coursetable.gson.Teacher;
 import com.example.dell.coursetable.webutil.HttpUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -60,6 +61,20 @@ public class CourseInfoModel implements  CourseInfoModelImpl {
         Gson gson=new Gson();
         List<Course> privateCourseList=gson.fromJson(response , new TypeToken<List<Course>>(){}.getType());
         courseList=privateCourseList;
+    }
+
+
+    @Override
+    public void getCoursesByNamesAndTeacahers(String courseNames, String teacherNames) throws IOException, ExecutionException, InterruptedException {
+        String response=HttpUtil.sendGetRequest(HttpUtil.host+"/courses/names&teachers/"+courseNames+"&"+teacherNames);
+        Gson gson=new Gson();
+        List<Course> privateCourseList=gson.fromJson(response , new TypeToken<List<Course>>(){}.getType());
+        courseList=privateCourseList;
+        List<Teacher> teachers=new TeacherModel().getTeachersByNames(teacherNames);
+        for (int i=0;i<=teachers.size()-1;i++)
+        {
+            courseList.get(i).setTeacherInfo(teachers.get(i));
+        }
     }
 
     @Override

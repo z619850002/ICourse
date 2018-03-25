@@ -19,4 +19,5 @@ public interface CourseInfoModelImpl {
     public void getAllCourses()throws IOException, ExecutionException , InterruptedException ;
     public void getCourseByNameAndTeacher(String name , String teacherName) throws IOException , ExecutionException , InterruptedException;
     public boolean createNewCourse(String courseName , String teacherName) throws IOException, ExecutionException , InterruptedException ;
+    public void getCoursesByNamesAndTeacahers(String courseNames ,String teacherNames) throws IOException , ExecutionException , InterruptedException;
 }
