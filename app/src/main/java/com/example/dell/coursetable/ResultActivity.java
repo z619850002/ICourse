@@ -1,18 +1,16 @@
 package com.example.dell.coursetable;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.dell.coursetable.coursedata.CourseInformation;
 import com.example.dell.coursetable.coursedata.CourseList;
-import com.example.dell.coursetable.presenter.CoursePresenter;
-import com.example.dell.coursetable.presenter.CoursePresenterImpl;
-import com.example.dell.coursetable.view.CourseTableViewImpl;
+import com.example.dell.coursetable.presenter.CourseSelPresenter;
+import com.example.dell.coursetable.presenter.CourseSelPresenterImpl;
+import com.example.dell.coursetable.view.CourseSelViewImpl;
 import com.zhuangfei.timetable.core.OnSubjectItemClickListener;
 import com.zhuangfei.timetable.core.SubjectBean;
 import com.zhuangfei.timetable.core.TimetableView;
@@ -20,28 +18,40 @@ import com.zhuangfei.timetable.core.TimetableView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TimeTableActivity extends AppCompatActivity implements OnSubjectItemClickListener , CourseTableViewImpl{
+public class ResultActivity extends AppCompatActivity implements CourseSelViewImpl,OnSubjectItemClickListener{
 
-
-    private CoursePresenterImpl cPresenter;
-
+    private TextView back;
     private TimetableView mTimeTableView;
     private List<SubjectBean> subjectBeans = new ArrayList<>();
-    private CourseList[][] courseLists_d;
-    private CourseList[][] courseLists_s;
-    private TextView addCourse;
+    private CourseSelPresenterImpl courseSelPresenter;
     private SwipeRefreshLayout refreshLayout;
+    private TextView addCourse;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_table);
-        mTimeTableView = (TimetableView)findViewById(R.id.timetableview);
+        courseSelPresenter = new CourseSelPresenter(this);
+        courseSelPresenter.showData();
+        initView();
+    }
+
+    private void initView(){
+        back = (TextView)findViewById(R.id.table_back);
         refreshLayout = (SwipeRefreshLayout)findViewById(R.id.table_refresh);
+        addCourse = (TextView)findViewById(R.id.add_course);
+        back.setVisibility(View.VISIBLE);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        addCourse.setVisibility(View.INVISIBLE);
+
         refreshLayout.setEnabled(false);
-        cPresenter=new CoursePresenter(TimeTableActivity.this);
-        cPresenter.show();
+        //refreshLayout.setRefreshing(true);
+
+        mTimeTableView = (TimetableView)findViewById(R.id.timetableview);
         mTimeTableView.setDataSource(subjectBeans)
                 .setCurWeek("2018-3-5 00:00:00")
                 .setMax(true)
@@ -49,15 +59,6 @@ public class TimeTableActivity extends AppCompatActivity implements OnSubjectIte
                 .setOnSubjectItemClickListener(this)
                 .showTimetableView();
         mTimeTableView.changeWeek(mTimeTableView.getCurWeek(),true);
-
-        addCourse=(TextView)findViewById(R.id.add_course);
-        addCourse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(TimeTableActivity.this, CourseActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     private void initCourse(CourseList[][] courseLists_d , CourseList[][] courseLists_s){
@@ -72,8 +73,8 @@ public class TimeTableActivity extends AppCompatActivity implements OnSubjectIte
                     j=temp;
                     CourseInformation courseInformation=courseList.get(k);
                     String week=courseInformation.getWeek();
-                    Integer beginWeek=Integer.parseInt(week.substring(week.indexOf('[')+1,week.indexOf('-')));
-                    Integer endWeek=Integer.parseInt(week.substring(week.indexOf('-')+1,week.indexOf(']')));
+                    Integer beginWeek=Integer.parseInt(week.substring(0,week.indexOf('-')));
+                    Integer endWeek=Integer.parseInt(week.substring(week.indexOf('-')+1,week.length()));
                     Integer beginTime=j;
                     Integer endTime=j;
                     if (j<11) {
@@ -124,7 +125,7 @@ public class TimeTableActivity extends AppCompatActivity implements OnSubjectIte
                             myWeekList.add(l+1);
                     }
 
-                    SubjectBean s = new SubjectBean(courseInformation.getName(), courseInformation.getArea(), courseInformation.getTeacher(), myWeekList, beginTime+1,endTime-beginTime+1 , i+1, 1, "");
+                    SubjectBean s = new SubjectBean(courseInformation.getName(), "", courseInformation.getTeacher(), myWeekList, beginTime+1,endTime-beginTime+1 , i+1, 1, "");
                     subjectBeans.add(s);
                 }
             }
@@ -143,8 +144,8 @@ public class TimeTableActivity extends AppCompatActivity implements OnSubjectIte
                     j=temp;
                     CourseInformation courseInformation=courseList.get(k);
                     String week=courseInformation.getWeek();
-                    Integer beginWeek=Integer.parseInt(week.substring(week.indexOf('[')+1,week.indexOf('-')));
-                    Integer endWeek=Integer.parseInt(week.substring(week.indexOf('-')+1,week.indexOf(']')));
+                    Integer beginWeek=Integer.parseInt(week.substring(0,week.indexOf('-')));
+                    Integer endWeek=Integer.parseInt(week.substring(week.indexOf('-')+1,week.length()));
                     Integer beginTime=j;
                     Integer endTime=j;
                     if (j<11) {
@@ -196,74 +197,29 @@ public class TimeTableActivity extends AppCompatActivity implements OnSubjectIte
                             myWeekList.add(l);
                     }
 
-                    SubjectBean s = new SubjectBean(courseInformation.getName(), courseInformation.getArea(), courseInformation.getTeacher(), myWeekList, beginTime+1,endTime-beginTime+1 , i+1, 1, "");
+                    SubjectBean s = new SubjectBean(courseInformation.getName(), "", courseInformation.getTeacher(), myWeekList, beginTime+1,endTime-beginTime+1 , i+1, 1, "");
                     subjectBeans.add(s);
                 }
             }
         }
     }
+    @Override
+    public void showData(List<String> strings) {
+
+    }
+
+    @Override
+    public void showCourse(CourseList[][] courseLists_d, CourseList[][] courseLists_s) {
+        initCourse(courseLists_d, courseLists_s);
+    }
+
+    @Override
+    public void show() {
+
+    }
 
     @Override
     public void onItemClick(View v, List<SubjectBean> subjectList) {
-        Bundle bundle = new Bundle();
-        for(int i =0; i < subjectList.size(); i++){
-            if(subjectList.get(i).getWeekList().contains(mTimeTableView.getCurWeek())){
-                bundle.putString("name", subjectList.get(i).getName());
-                bundle.putString("room",subjectList.get(i).getRoom());
-                bundle.putString("start",subjectList.get(i).getStart()+"");
-                bundle.putString("step",subjectList.get(i).getStep()+"");
-                bundle.putString("teacher",subjectList.get(i).getTeacher());
 
-                List<CourseInformation>list = courseLists_d[subjectList.get(i).getDay()-1][subjectList.get(i).getStart()-1].getCourseInfomations();
-                int j = 0;
-                while(!list.get(j).getName().equals(subjectList.get(i).getName())){
-                    j++;
-                }
-                if(j>=list.size()){
-                    j=0;
-                    list = courseLists_s[subjectList.get(i).getDay()-1][subjectList.get(i).getStart()-1].getCourseInfomations();
-                    while(!list.get(j).getName().equals(subjectList.get(i).getName())){
-                        j++;
-                    }
-                }
-                bundle.putString("week",list.get(j).getWeek());
-            }
-        }
-        if(bundle.isEmpty()){
-            bundle.putString("name", subjectList.get(0).getName());
-            bundle.putString("room",subjectList.get(0).getRoom());
-            bundle.putString("start",subjectList.get(0).getStart()+"");
-            bundle.putString("step",subjectList.get(0).getStep()+"");
-            bundle.putString("teacher",subjectList.get(0).getTeacher());
-            List<CourseInformation>list = courseLists_d[subjectList.get(0).getDay()-1][subjectList.get(0).getStart()-1].getCourseInfomations();
-            int j = 0;
-            while(!list.get(j).getName().equals(subjectList.get(0).getName())){
-                j++;
-            }
-            if(j>=list.size()){
-                j=0;
-                list = courseLists_s[subjectList.get(0).getDay()-1][subjectList.get(0).getStart()-1].getCourseInfomations();
-                while(!list.get(j).getName().equals(subjectList.get(0).getName())){
-                    j++;
-                }
-            }
-            bundle.putString("week",list.get(j).getWeek());
-        }
-        Intent intent = new Intent(TimeTableActivity.this, CourseInfoActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
-    }
-
-
-    @Override
-    public void showData(CourseList[][] courseLists_d  , CourseList[][] courseLists_s) {
-        initCourse(courseLists_d , courseLists_s);
-        this.courseLists_d = courseLists_d;
-        this.courseLists_s = courseLists_s;
-    }
-
-    @Override
-    public void showError(String message) {
-        Toast.makeText(TimeTableActivity.this , message , Toast.LENGTH_LONG).show();
     }
 }

@@ -7,18 +7,49 @@
     tools:context="com.example.dell.coursetable.TimeTableActivity">
 
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp">
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="40dp"
+        android:id="@+id/table_title"
+        android:background="#ffffff">
+        <TextView
+            android:id="@+id/table_back"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_action_back"
+            android:visibility="gone"/>
 
-    <com.zhuangfei.timetable.core.TimetableView
-        android:layout_below="@id/toolbar"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="课程表"
+            android:textSize="17sp"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:id="@+id/add_course"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/ic_action_add"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/table_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/timetableview">
-    </com.zhuangfei.timetable.core.TimetableView>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/table_title">
+        <com.zhuangfei.timetable.core.TimetableView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/timetableview">
+        </com.zhuangfei.timetable.core.TimetableView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </RelativeLayout>

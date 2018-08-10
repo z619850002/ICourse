@@ -3,6 +3,7 @@ package com.example.dell.coursetable.model;
 import com.example.dell.coursetable.gson.Teacher;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -12,4 +13,5 @@ import java.util.concurrent.ExecutionException;
 public interface TeacherModelImpl {
     public void getTeacherByName(String name)throws IOException, ExecutionException, InterruptedException ;
     public boolean createTeacher(String teacherName)throws IOException, ExecutionException , InterruptedException ;
+    public List<Teacher> getTeachersByNames(String name) throws IOException ,ExecutionException , InterruptedException;
 }

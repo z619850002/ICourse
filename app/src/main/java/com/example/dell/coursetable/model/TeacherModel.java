@@ -29,6 +29,16 @@ public class TeacherModel implements  TeacherModelImpl {
         this.teacher=privateTeacher.get(0);
     }
 
+
+    @Override
+    public List<Teacher> getTeachersByNames(String names) throws IOException, ExecutionException, InterruptedException {
+
+        String response= HttpUtil.sendGetRequest(HttpUtil.host+"/teachers/names/"+names);
+        Gson gson=new Gson();
+        List<Teacher> privateTeacher = gson.fromJson(response , new TypeToken<List<Teacher>>(){}.getType());
+        return privateTeacher;
+    }
+
     @Override
     public boolean createTeacher(String teacherName) throws IOException, ExecutionException , InterruptedException {
 
