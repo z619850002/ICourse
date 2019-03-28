@@ -1,2 +1,2 @@
 # ICourse
-Just a interesting application
+Just an interesting application
